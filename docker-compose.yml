@@ -12,9 +12,35 @@ services:
     networks:
       - mongo
       - home_system
+      - skynet
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - notes
+    networks:
+      - skynet
+
+  notes:
+    restart: always
+    container_name: home_notes
+    image: zaytsevdv/home-notes:prod-latest
+    ports:
+      - "8080:8080"
+    networks:
+      - skynet
 
 networks:
   mongo:
     driver: bridge
   home_system:
+    driver: bridge
+  skynet:
     driver: bridge
