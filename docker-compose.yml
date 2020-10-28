@@ -10,8 +10,6 @@ services:
     volumes:
       - ./data/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
-      - mongo
-      - home_system
       - skynet
 
   nginx:
@@ -67,9 +65,5 @@ services:
       - eureka
 
 networks:
-  mongo:
-    driver: bridge
-  home_system:
-    driver: bridge
   skynet:
     driver: bridge
