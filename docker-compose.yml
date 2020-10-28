@@ -25,6 +25,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - notes
+      - notifications
     networks:
       - skynet
 
@@ -34,6 +35,15 @@ services:
     image: zaytsevdv/home-notes:prod-latest
     ports:
       - "8080:8080"
+    networks:
+      - skynet
+
+  notifications:
+    restart: always
+    container_name: home_notifications
+    image: zaytsevdv/home-notifications:prod-latest
+    ports:
+      - "8081:8080"
     networks:
       - skynet
 
